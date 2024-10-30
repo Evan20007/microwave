@@ -1,1 +1,56 @@
+let microwave;
+
+function setup() {
+    createCanvas(800, 400); // Increased canvas width
+    microwave = new Microwave();
+}
+
+function draw() {
+    background(220);
+    microwave.display();
+    microwave.update();
+}
+
+class Microwave {
+    constructor() {
+        this.timer = 0;
+        this.isRunning = false;
+        this.isDoorOpen = false;
+        this.foodInMicrowave = null; // Change to hold the type of food
+        this.inputTimer = createInput('');
+        this.inputTimer.position(150, 350);
+        this.inputTimer.size(50);
+        this.inputTimer.attribute('placeholder', 'Set Time (s)');
+        this.turntableAngle = 0;
+        this.timerFinished = false;
+        this.foodTypes = ['Pizza', 'Popcorn', 'Soup', 'Vegetables', 'Rice']; // Different types of food
+        this.selectedFoodIndex = 0; // Index of currently selected food
+    }
+
+    display() {
+        this.drawMicrowave();
+        if (this.foodInMicrowave) {
+            this.drawFood();
+        }
+        this.drawButtons();
+        this.drawFunctionButtons();
+        this.showTimer();
+        this.drawShelf(); // Draw the shelf
+    }
+
+    update() {
+        if (this.isRunning) {
+            this.timer--;
+            this.turntableAngle += 0.1;
+            if (this.timer <= 0) {
+                this.stopMicrowave();
+                this.foodInMicrowave = null; // Reset food in microwave
+                this.timerFinished = true;
+                console.log("Cooking finished.");
+            }
+        }
+     }
+	
+}
+
 
