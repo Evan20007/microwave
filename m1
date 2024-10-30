@@ -1,4 +1,4 @@
-let microwave;
+let microwave;  // vector rotate 
 
 function setup() {
     createCanvas(800, 400); // Increased canvas width
@@ -50,8 +50,50 @@ class Microwave {
             }
         }
      }
+	 drawMicrowave() {
+        fill(150);
+        rect(50, 50, 400, 250); // Microwave body
+
+        // Door
+        if (this.isDoorOpen) {
+            fill(100);
+            rect(50, 50, 10, 250); // Left part of the door
+            fill(150);
+            rect(440, 50, 10, 250); // Right part of the door
+        } else {
+            fill(100);
+            rect(50, 50, 400, 250); // Full door closed
+        }
+
+        // Window
+        fill(0, 0, 100, 100);
+        rect(60, 60, 380, 180); // Microwave window
+
+        // Door handle (hidden when door is open)
+        if (!this.isDoorOpen) {
+            fill(200);
+            rect(400, 120, 10, 50); // Handle on the door
+        }
+   
+	 }
+	drawFood() {
+		push();
+		translate(250,175); // Ajust position for bigger microwave
+		rotate(this.turntableAngle);
+		fill(255);
+		ellipse(0, 0, 150, 10);
+		fill(255,0,0);
+		ellipse(0,0,30,30);
+		textAlign(CENTER);
+		fill(0);
+		text(this.foodInMicrowave,0,5);
+		pop();
+		
+	}
+	showTimer(){
+		fill(255);
+		textSize(20);
+	}
 	
 }
-
-
 
