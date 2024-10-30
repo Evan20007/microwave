@@ -1,4 +1,4 @@
-feygflet microwave;
+let microwave;
 
 function setup() {
     createCanvas(800, 400); // Increased canvas width
