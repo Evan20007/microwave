@@ -176,8 +176,8 @@ class Microwave {
         fill(255);
         text('Start', 440, 90);
         text('Stop', 440, 130);
-        text('Reset', 440, 170);
-        text('Place Food', 440, 210);
+        text('Reset', 435, 170);
+        text('Replace', 425, 210);
     }
 
     drawFunctionButtons() {
