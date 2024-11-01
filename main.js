@@ -10,7 +10,7 @@ function draw() {
     microwave.display();
     microwave.update();
 }
-
+// whenever the mouse is clicked and the food is selected draw the food in the draw function
 class Microwave {
     constructor() {
         this.timer = 0;
@@ -47,7 +47,7 @@ class Microwave {
             this.drawSmoke();
         }
     }
-
+hhhhh
     update() {
         if (this.isRunning) {
             let currentTime = millis();
