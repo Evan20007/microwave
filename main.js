@@ -169,15 +169,15 @@ hhhhh
 
     drawButtons() {
         fill(0);
-        rect(420, 70, 60, 30); 
-        rect(420, 110, 60, 30); 
-        rect(420, 150, 60, 30); 
-        rect(420, 190, 60, 30); 
+        rect(460, 70, 60, 30); 
+        rect(460, 110, 60, 30); 
+        rect(460, 150, 60, 30); 
+        rect(460, 190, 60, 30); 
         fill(255);
-        text('Start', 440, 90);
-        text('Stop', 440, 130);
-        text('Reset', 435, 170);
-        text('Replace', 425, 210);
+        text('Start', 480, 90);
+        text('Stop', 480, 130);
+        text('Reset', 475, 170);
+        text('Replace', 460, 210);
     }
 
     drawFunctionButtons() {
@@ -186,12 +186,12 @@ hhhhh
         rect(50, buttonY, 100, 30); 
         rect(160, buttonY, 100, 30); 
         rect(270, buttonY, 100, 30); 
-        rect(380, buttonY, 100, 30); 
+        rect(390, buttonY, 70, 30); 
         fill(255);
-        text('Defrost', 100, buttonY + 20);
-        text('Reheat', 210, buttonY + 20);
-        text('Cook', 320, buttonY + 20);
-        text('Popcorn', 430, buttonY + 20);
+        text('Defrost', 90, buttonY + 20);
+        text('Reheat', 200, buttonY + 20);
+        text('Cook', 310, buttonY + 20);
+        text('Popcorn', 400, buttonY + 20);
     }
 
     drawShelf() {
