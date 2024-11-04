@@ -10,7 +10,7 @@ function draw() {
     microwave.display();
     microwave.update();
 }
-// whenever the mouse is clicked and the food is selected draw the food in the draw function
+
 class Microwave {
     constructor() {
         this.timer = 0;
@@ -47,7 +47,7 @@ class Microwave {
             this.drawSmoke();
         }
     }
-hhhhh
+
     update() {
         if (this.isRunning) {
             let currentTime = millis();
@@ -208,4 +208,74 @@ hhhhh
             text(this.foodTypes[i], 615, 120 + i * 35);
         }
     }
+    startMicrowave() {
+        if (!this.isDoorOpen && this.foodInMicrowave && this.timer > 0) {
+            this.isRunning = true;
+            this.timerFinished = false; 
+            console.log("Microwave started with timer: " + this.timer);
+        } else {
+            console.log("Cannot start microwave. Check conditions.");
+        }
+    }
+    StopMicrowave (){
+        this.isRunning = false;
+    }
+
+    openDoor(){
+        this.isDoorOpen = true;
+        this.StopMicrowave ();
+        console.log("Door opened");
+    }
+    CloseDoor(){
+        this.isDoorOpen = false;
+    }
+resetMicrowave (){
+    this.timer= 0;
+    this.StopMicrowave();
+    this.foodInMicrowave = null;
+    this.inputTimer.Value('');
+    this.turntableAngle = 0;
+    this.timerFinished = false;
+    this.overheated = false;
+    this.foodOnShelf = null; // reset food on shelf
+    this.foodVisibleTime = 0 ; 
+    console.log("Microwave reset.");
+
 }
+placeFood(){
+    if(this.isDoorOpen){
+        this.foodInMicrowave = this.foodTypes[ this.selectedFoodIndex];
+        console.log("Food placed in microwave" + this.foodInMicrowave)
+    } else {
+        console.log("Cannot place food. The door must be open.");
+    }
+}
+
+setTimer() {
+    let timeInput = int(this.inputTimer.value());
+    if (timeInput > 0) {
+        this.timer = timeInput;
+        console.log("Timer set to: " + this.timer);
+        this.inputTimer.value('');
+    } else {
+        console.log("Invalid timer value.");
+    }
+}
+ selectFood(index){
+    this.selectedFoodIndex = index;
+    console.log("Selected food :"+ this.foodTypes[index]);
+ }
+ takeOutFood() {
+    if (this.isDoorOpen && this.timerFinished) {
+        console.log("Food taken out from microwave: " + this.foodInMicrowave);
+        this.foodOnShelf = this.foodInMicrowave; // Show food on shelf
+        this.foodInMicrowave = null; // Food is taken out
+        this.timerFinished = false; // Reset timer finished state
+        this.showPrompt = false; // Hide prompt after taking out food
+        this.overheated = false; // Reset overheating state
+    }
+}
+
+}
+
+
