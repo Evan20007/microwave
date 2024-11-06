@@ -70,7 +70,12 @@ class Microwave {
                 this.foodPulsing = true; 
 
                 if (this.timer <= 0) {
+<<<<<<< Updated upstream
                     this.stopMicrowave();
+=======
+                    this.StopMicrowave();
+                    this.foodInMicrowave = null;
+>>>>>>> Stashed changes
                     this.timerFinished = true;
                     setTimeout(() => {
                         this.showPrompt = true; // Show prompt after 2 seconds
@@ -107,7 +112,7 @@ class Microwave {
         }
         fill(0, 0, 100, 100);
         rect(60, 60, 380, 180);
-        if (!this.isDoorOpen) {
+        if (!this.isDoorClosed) {
             fill(200);
             rect(400, 120, 10, 50);
         }
@@ -121,22 +126,8 @@ class Microwave {
         pop();
     }
 
-    drawFood() {
-        push();
-        translate(250, 175);
-        rotate(this.turntableAngle);
-        fill(255);
-        let pulseSize = this.foodPulsing ? map(sin(frameCount * 0.1), -1, 1, 25, 30) : 30;
-        ellipse(0, 0, pulseSize, pulseSize); // Pulsing effect
-        fill(255, 0, 0);
-        ellipse(0, 0, 30, 30); // Food
-        textAlign(CENTER);
-        fill(0);
-        text(this.foodInMicrowave, 0, 5);
-        pop();
-        this.foodPulsing = false; // Reset after drawing
-    }
-
+   
+    
     drawSmoke() {
         for (let i = 0; i < 5; i++) {
             fill(150, 150, 150, 150);
