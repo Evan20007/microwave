@@ -24,7 +24,7 @@ class Microwave {
         this.turntableAngle = 0;
         this.timerFinished = false;
         this.showPrompt = false;
-        this.foodTypes = ['Pizza', 'Popcorn', 'Soup', 'Noodles', 'Rice'];
+        this.foodTypes = ['Pizza', 'chicken', 'Soup', 'Noodles', 'Burger'];
         this.selectedFoodIndex = 0;
         this.lastUpdateTime = 0; 
         this.smokeTimer = 0; 
