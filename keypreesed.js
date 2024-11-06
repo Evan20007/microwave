@@ -36,9 +36,9 @@ function keyPressed() {
         microwave.resetMicrowave();
     } else if (keyCode === ENTER) {
         microwave.setTimer();
-    } else if (key === 'O') {
+    } else if (key === 'o') {
         microwave.openDoor();
-    } else if (key === 'C') {
+    } else if (key === 'c') {
         microwave.closeDoor();
     }
 }

@@ -10,7 +10,7 @@ function draw() {
     microwave.display();
     microwave.update();
 }
-// whenever the mouse is clicked and the food is selected draw the food in the draw function
+
 class Microwave {
     constructor() {
         this.timer = 0;
@@ -58,7 +58,7 @@ class Microwave {
                 this.foodPulsing = true; 
 
                 if (this.timer <= 0) {
-                    this.stopMicrowave();
+                    this.StopMicrowave();
                     this.foodInMicrowave = null;
                     this.timerFinished = true;
                     this.smokeTimer = currentTime; 
@@ -165,8 +165,8 @@ class Microwave {
         let minutes = floor(seconds / 60);
         let secs = seconds % 60;
         return nf(minutes, 2) + ':' + nf(secs, 2);
-   
     }
+
     drawButtons() {
         fill(0);
         rect(460, 70, 60, 30); 
@@ -242,8 +242,6 @@ resetMicrowave (){
     console.log("Microwave reset.");
 
 }
-
-
 placeFood(){
     if(this.isDoorOpen){
         this.foodInMicrowave = this.foodTypes[ this.selectedFoodIndex];
@@ -277,7 +275,8 @@ setTimer() {
         this.overheated = false; // Reset overheating state
     }
 }
-}
 
+
+}
 
 
