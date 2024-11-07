@@ -1,4 +1,15 @@
 let microwave;
+let foodImages = {}; // Object to hold food images
+let buttonWidth
+
+function preload() {
+    // Load food images for each food type
+    foodImages.Pizza = loadImage('pizza.jpg'); 
+    foodImages.Popcorn = loadImage('popcorn.jpg'); 
+   // foodImages.Soup = loadImage('soup.png'); 
+   // foodImages.Noodles = loadImage('noodles.png');  path
+   // foodImages.Rice = loadImage('rice.png');
+}
 
 function setup() {
     createCanvas(800, 400);
@@ -24,21 +35,21 @@ class Microwave {
         this.turntableAngle = 0;
         this.timerFinished = false;
         this.showPrompt = false;
-        this.foodTypes = ['Pizza', 'chicken', 'Soup', 'Noodles', 'Burger'];
+        this.foodTypes = ['Pizza', 'Popcorn', 'Soup', 'Noodles', 'Rice'];
         this.selectedFoodIndex = 0;
-        this.lastUpdateTime = 0; 
-        this.smokeTimer = 0; 
-        this.smokeDelay = 5000; 
-        this.overheated = false; 
-        this.foodPulsing = false; 
-        this.foodOnShelf = null; // New variable to show food on shelf
-        this.foodVisibleTime = 0; // Timer for food visibility
+        this.lastUpdateTime = 0;
+        this.smokeTimer = 0;
+        this.smokeDelay = 5000;
+        this.overheated = false;
+        this.foodPulsing = false;
+        this.foodOnShelf = null;
+        this.foodVisibleTime = 0;
     }
 
     display() {
         this.drawMicrowave();
         if (this.foodInMicrowave) {
-            this.drawPlate(); 
+            this.drawPlate();
             this.drawFood();
         }
         this.drawButtons();
@@ -46,7 +57,7 @@ class Microwave {
         this.showTimer();
         this.drawInstructions();
         this.drawShelf();
-        if (this.isDoorOpen && this.overheated) { // Show smoke only if the door is open and food is overheated
+        if (this.isDoorOpen && this.overheated) {
             this.drawSmoke();
         }
         if (this.showPrompt) {
@@ -65,35 +76,29 @@ class Microwave {
             let currentTime = millis();
             if (currentTime - this.lastUpdateTime >= 1000) {
                 this.timer--;
-                this.lastUpdateTime = currentTime; 
+                this.lastUpdateTime = currentTime;
                 this.turntableAngle += 0.1;
-                this.foodPulsing = true; 
+                this.foodPulsing = true;
 
                 if (this.timer <= 0) {
-<<<<<<< Updated upstream
                     this.stopMicrowave();
-=======
-                    this.StopMicrowave();
-                    this.foodInMicrowave = null;
->>>>>>> Stashed changes
                     this.timerFinished = true;
                     setTimeout(() => {
-                        this.showPrompt = true; // Show prompt after 2 seconds
-                    }, 2000); // 2-second delay for the prompt
+                        this.showPrompt = true;
+                    }, 2000);
                 }
             }
         }
 
         if (this.timerFinished && millis() - this.smokeTimer >= this.smokeDelay) {
-            this.overheated = true; 
+            this.overheated = true;
         }
 
-        // Handle food visibility on shelf
         if (this.foodOnShelf) {
             this.foodVisibleTime += deltaTime;
-            if (this.foodVisibleTime >= 10000) { // 10 seconds
-                this.foodOnShelf = null; // Hide food after 10 seconds
-                this.foodVisibleTime = 0; // Reset timer
+            if (this.foodVisibleTime >= 10000) {
+                this.foodOnShelf = null;
+                this.foodVisibleTime = 0;
             }
         }
     }
@@ -112,7 +117,7 @@ class Microwave {
         }
         fill(0, 0, 100, 100);
         rect(60, 60, 380, 180);
-        if (!this.isDoorClosed) {
+        if (!this.isDoorOpen) {
             fill(200);
             rect(400, 120, 10, 50);
         }
@@ -122,12 +127,30 @@ class Microwave {
         push();
         translate(250, 175);
         fill(200, 200, 255); // Plate color
-        ellipse(0, 0, 70, 70); // Draw plate
+        ellipse(0, 0, 70, 70); // Plate
         pop();
     }
 
-   
-    
+    drawFood() {
+        push();
+        translate(250, 175);
+        rotate(this.turntableAngle);
+
+        // Displaying food images based on the selected food type
+        if (this.foodInMicrowave) {
+            let foodImage = foodImages[this.foodInMicrowave]; // Get the image for the selected food type
+            if (foodImage) {
+                imageMode(CENTER);
+                image(foodImage, 0, 0, 50, 50); // Draw the image of the food, scaling it to fit inside the microwave
+            }
+        }
+
+        textAlign(CENTER);
+        fill(0);
+        text(this.foodInMicrowave, 0, 60); // Display food name below image
+        pop();
+    }
+
     drawSmoke() {
         for (let i = 0; i < 5; i++) {
             fill(150, 150, 150, 150);
@@ -171,7 +194,7 @@ class Microwave {
 
     showTimer() {
         fill(255);
-        textSize(20); // Keep timer text size consistent
+        textSize(20);
         if (this.timer > 0) {
             text(this.formatTime(this.timer), 200, 100);
         }
@@ -179,7 +202,7 @@ class Microwave {
             fill(255, 0, 0);
             textSize(30);
             text('Cooking Finished!', 50, 200);
-            textSize(20); // Reset text size for next elements
+            textSize(20); 
         }
     }
 
@@ -216,7 +239,6 @@ class Microwave {
         text('Popcorn', 400, buttonY + 20);
     }
 
-
     drawShelf() {
         fill(150, 100, 50);
         rect(600, 70, 150, 200);
@@ -235,7 +257,7 @@ class Microwave {
     startMicrowave() {
         if (!this.isDoorOpen && this.foodInMicrowave && this.timer > 0) {
             this.isRunning = true;
-            this.timerFinished = false; 
+            this.timerFinished = false;
             console.log("Microwave started with timer: " + this.timer);
         } else {
             console.log("Cannot start microwave. Check conditions.");
@@ -262,10 +284,10 @@ class Microwave {
         this.foodInMicrowave = null;
         this.inputTimer.value('');
         this.turntableAngle = 0;
-        this.timerFinished = false; 
-        this.overheated = false; 
-        this.foodOnShelf = null; // Reset food on shelf
-        this.foodVisibleTime = 0; // Reset visibility time
+        this.timerFinished = false;
+        this.overheated = false;
+        this.foodOnShelf = null;
+        this.foodVisibleTime = 0;
         console.log("Microwave reset.");
     }
 
@@ -290,18 +312,18 @@ class Microwave {
     }
 
     selectFood(index) {
-        this.selectedFoodIndex = index; 
+        this.selectedFoodIndex = index;
         console.log("Selected food: " + this.foodTypes[index]);
     }
 
     takeOutFood() {
         if (this.isDoorOpen && this.timerFinished) {
             console.log("Food taken out from microwave: " + this.foodInMicrowave);
-            this.foodOnShelf = this.foodInMicrowave; // Show food on shelf
-            this.foodInMicrowave = null; // Food is taken out
-            this.timerFinished = false; // Reset timer finished state
-            this.showPrompt = false; // Hide prompt after taking out food
-            this.overheated = false; // Reset overheating state
+            this.foodOnShelf = this.foodInMicrowave;
+            this.foodInMicrowave = null;
+            this.timerFinished = false;
+            this.showPrompt = false;
+            this.overheated = false;
         }
     }
 }
